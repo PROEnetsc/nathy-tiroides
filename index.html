@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salud y Bienestar de Nathy - Pasapalos Dulce y Sal</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a; /* Azul oscuro principal */
+            --secondary-color: #172554; /* Azul marino profundo */
+            --accent-color: #3b82f6; /* Azul acento para detalles */
+            --whatsapp-color: #25d366; /* Color oficial WhatsApp */
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+        }
+
+        header p {
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        /* Estructura en dos columnas general para secciones */
+        .grid-2-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .historia-content p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .descripcion-col ul {
+            padding-left: 20px;
+        }
+
+        .descripcion-col li {
+            margin-bottom: 0.8rem;
+        }
+
+        .imagenes-col {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 10px;
+        }
+
+        .thumbnail-container {
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f1f5f9;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: center;
+        }
+
+        .thumbnail-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(30,58,138,0.15);
+        }
+
+        .thumbnail-container img {
+            width: 100%;
+            height: 90px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .thumbnail-label {
+            font-size: 0.75rem;
+            padding: 4px;
+            color: #475569;
+            background: #e2e8f0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Sección de Donaciones y Apoyo */
+        .donations-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .donations-box h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            text-align: center;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .donations-message {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #475569;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .donations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .donation-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .donation-card h4 {
+            margin-top: 0;
+            color: var(--secondary-color);
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 0.4rem;
+            font-size: 1rem;
+        }
+
+        .donation-card ul {
+            padding-left: 18px;
+            margin: 0.5rem 0 0 0;
+            font-size: 0.9rem;
+        }
+
+        .donation-card li {
+            margin-bottom: 0.3rem;
+        }
+
+        .rifa-note {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #1e40af;
+            margin-top: 1rem;
+        }
+
+        /* Sección de Contacto WhatsApp */
+        .whatsapp-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .whatsapp-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp-color);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(37, 211, 102, 0.2);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ebe5d;
+            transform: translateY(-2px);
+        }
+
+        /* Tabla de Transparencia y Presupuesto */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-pendiente {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-completado {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        /* Estilos del Modal (Lightbox para ampliar imágenes) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        }
+
+        .modal-caption {
+            color: white;
+            margin-top: 1rem;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(0,0,0,0.4);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .close-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 3rem;
+            background: #ffffff;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Pasapalos Dulce y Sal</h1>
+        <p>Bitácora de Transparencia y Apoyo por la Salud de Nathy</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- Sección 1: Nuestra Historia y Antecedentes Clínicos -->
+        <div class="section-card">
+            <h2>Nuestra Historia y Antecedentes Clínicos</h2>
+            <div class="grid-2-col">
+                <div class="historia-content">
+                    <p>Detrás de cada mesa dulce y cada celebración de <strong>Pasapalos Dulce y Sal</strong> se encuentra el amor, la dedicación y el talento de Nathy. Como apasionada pastelera y profesional de la ingeniería de sistemas, Nathy ha construido con esfuerzo este espacio donde el buen gusto y el compromiso familiar van de la mano.</p>
+                    <p><strong>Antecedente Médico:</strong> Hace aproximadamente 8 años, Nathy fue sometida a una intervención quirúrgica tiroidea realizada exitosamente por el <strong>Dr. Juvenal Vargas</strong> (Médico Cirujano). Desde entonces, ha mantenido un control riguroso y constante de su salud, consumiendo de forma regular la hormona tiroidea sintética <strong>Eutirox</strong> para regular sus niveles de hipotiroidismo.</p>
+                    <p>Durante todo este tiempo su evolución fue excelente, hasta que <strong>en el mes de julio de 2026</strong> se observó una inflamación notable en la porción de tiroides que le había sido conservada en aquella operación.</p>
+                </div>
+                <div class="imagenes-col">
+                    <div class="thumbnail-container" onclick="openModal('images/familia/nathy_oscar.jpg', 'Nathy y Oscar')">
+                        <img src="images/familia/nathy_oscar.jpg" alt="Nathy y Oscar">
+                        <div class="thumbnail-label">Nathy y Oscar</div>
+                    </div>
+                    <div class="thumbnail-container" onclick="openModal('images/familia/familia.jpg', 'Momentos en Familia')">
+                        <img src="images/familia/familia.jpg" alt="Familia">
+                        <div class="thumbnail-label">Familia</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 2: Seguimiento Julio / 2026 -->
+        <div class="section-card">
+            <h2>Seguimiento Julio / 2026</h2>
+            <div class="grid-2-col">
+                <div class="descripcion-col">
+                    <p>Ante la inflamación presentada a mediados de año, iniciamos los protocolos de evaluación clínica:</p>
+                    <ul>
+                        <li><strong>Evaluación con la Dra. Zaravik Molina:</strong> Asistimos a consulta de control donde la especialista interpretó los exámenes de laboratorio y la ecografía inicial de julio de 2026.</li>
+                        <li><strong>Ajuste Terapéutico:</strong> Debido a que los valores hormonales presentaban ciertas alteraciones, la Dra. Molina ajustó la dosis de <strong>Eutirox</strong> con el propósito de estabilizar el organismo y preparar a Nathy de cara a la punción planificada para septiembre.</li>
+                        <li><strong>Estudios Ecográficos:</strong> Monitoreo detallado de los cambios en el tejido remanente.</li>
+                    </ul>
+                    <p><em>Haz clic en cualquier miniatura de la derecha para detallar los informes y estudios originales de este período.</em></p>
+                </div>
+                <div class="imagenes-col">
+                    <div class="thumbnail-container" onclick="openModal('images/julio-2026/01_Examen1.jpg', 'Examen 1 - Julio 2026')">
+                        <img src="images/julio-2026/01_Examen1.jpg" alt="Examen 1">
+                        <div class="thumbnail-label">Examen 1</div>
+                    </div>
+                    <div class="thumbnail-container" onclick="openModal('images/julio-2026/02_Examen2.jpg', 'Examen 2 - Julio 2026')">
+                        <img src="images/julio-2026/02_Examen2.jpg" alt="Examen 2">
+                        <div class="thumbnail-label">Examen 2</div>
+                    </div>
+                    <div class="thumbnail-container" onclick="openModal('images/julio-2026/03_Eco1.jpg', 'Ecografía 1 - Julio 2026')">
+                        <img src="images/julio-2026/03_Eco1.jpg" alt="Eco 1">
+                        <div class="thumbnail-label">Eco 1</div>
+                    </div>
+                    <div class="thumbnail-container" onclick="openModal('images/julio-2026/04_Eco2.jpg', 'Ecografía 2 - Julio 2026')">
+                        <img src="images/julio-2026/04_Eco2.jpg" alt="Eco 2">
+                        <div class="thumbnail-label">Eco 2</div>
+                    </div>
+                    <div class="thumbnail-container" onclick="openModal('images/julio-2026/05_Eco3.jpg', 'Ecografía 3 - Julio 2026')">
+                        <img src="images/julio-2026/05_Eco3.jpg" alt="Eco 3">
+                        <div class="thumbnail-label">Eco 3</div>
+                    </div>
+                    <div class="thumbnail-container" onclick="openModal('images/julio-2026/06_Informe_Ecografia.jpg', 'Informe de Ecografía - Julio 2026')">
+                        <img src="images/julio-2026/06_Informe_Ecografia.jpg" alt="Informe Eco">
+                        <div class="thumbnail-label">Informe Eco</div>
+                    </div>
+                    <div class="thumbnail-container" onclick="openModal('images/julio-2026/07_Examen1.jpg', 'Examen Adicional - Julio 2026')">
+                        <img src="images/julio-2026/07_Examen1.jpg" alt="Examen Adic.">
+                        <div class="thumbnail-label">Examen Adic.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 3: Estado Actual y Transparencia -->
+        <div class="section-card">
+            <h2>Estado Actual y Transparencia</h2>
+            <p>Mantener una total claridad sobre los recursos es nuestro compromiso fundamental con cada persona que decide sumarse a este apoyo. A continuación, presentamos el desglose de los gastos médicos y las etapas presupuestarias:</p>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Concepto / Gasto Médico</th>
+                            <th>Fase / Fecha Estimada</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Consultas y Perfiles Hormonales (Laboratorios)</td>
+                            <td>Julio 2026</td>
+                            <td><span class="status-badge status-completado">Completado</span></td>
+                        </tr>
+                        <tr>
+                            <td>Ecosonogramas y Monitoreo Inicial</td>
+                            <td>Julio - Septiembre 2026</td>
+                            <td><span class="status-badge status-completado">Completado</span></td>
+                        </tr>
+                        <tr>
+                            <td>Consulta Especializada Endocrinología y Punción</td>
+                            <td>Septiembre 2026</td>
+                            <td><span class="status-badge status-completado">Completado</span></td>
+                        </tr>
+                        <tr>
+                            <td>Procesamiento de Muestras Patológicas (Biopsias)</td>
+                            <td>Entrega: 09/10/2026</td>
+                            <td><span class="status-badge status-pendiente">En Proceso</span></td>
+                        </tr>
+                        <tr>
+                            <td>Evaluación Quirúrgica y Presupuesto</td>
+                            <td>Próxima Fase</td>
+                            <td><span class="status-badge status-pendiente">En Curso</span></td>
+                        </tr>
+                        <tr>
+                            <td>Intervención Quirúrgica y Clínica</td>
+                            <td>Por Programar</td>
+                            <td><span class="status-badge status-pendiente">Pendiente</span></td>
+                        </tr>
+                        <tr>
+                            <td>Postoperatorio, Reposo (~21 días) y Controles Endocrinológicos</td>
+                            <td>Fase Posterior a la Cirugía</td>
+                            <td><span class="status-badge status-pendiente">Pendiente</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Sección 4: Seguimiento Septiembre / 2026 -->
+        <div class="section-card">
+            <h2>Seguimiento Septiembre / 2026</h2>
+            <div class="grid-2-col">
+                <div class="descripcion-col">
+                    <p>Durante septiembre de 2026 avanzamos de manera significativa en las evaluaciones clínicas determinantes:</p>
+                    <ul>
+                        <li><strong>Punción Biopsia:</strong> Realizada por el Dr. Luis Ernesto Jaimes (Médico Internista Endocrinólogo) para extraer muestras de los nódulos y enviarlas al laboratorio patológico. Resultados previstos para el <strong>09/10/2026</strong>.</li>
+                        <li><strong>Evaluación Quirúrgica:</strong> Reencuentro en consulta con el Dr. Juvenal Vargas (Médico Cirujano) para valorar opciones y procedimientos, confirmando las directrices de la intervención y emitiendo el informe técnico respectivo.</li>
+                        <li><strong>Controles Ecográficos:</strong> Actualización de estudios y analíticas complementarias.</li>
+                    </ul>
+                    <p><em>Haz clic en cualquier miniatura de la derecha para verificar los exámenes, ecos e informes de este período.</em></p>
+                </div>
+                <div class="imagenes-col">
+                    <div class="thumbnail-container" onclick="openModal('images/septiembre-2026/00_Examenes.jpg', 'Exámenes - Septiembre 2026')">
+                        <img src="images/septiembre-2026/00_Examenes.jpg" alt="Exámenes">
+                        <div class="thumbnail-label">Exámenes</div>
+                    </div>
+                    <div class="thumbnail-container" onclick="openModal('images/septiembre-2026/01_Eco1.jpg', 'Ecografía 1 - Septiembre 2026')">
+                        <img src="images/septiembre-2026/01_Eco1.jpg" alt="Eco 1">
+                        <div class="thumbnail-label">Eco 1</div>
+                    </div>
+                    <div class="thumbnail-container" onclick="openModal('images/septiembre-2026/02_Eco2.jpg', 'Ecografía 2 - Septiembre 2026')">
+                        <img src="images/septiembre-2026/02_Eco2.jpg" alt="Eco 2">
+                        <div class="thumbnail-label">Eco 2</div>
+                    </div>
+                    <div class="thumbnail-container" onclick="openModal('images/septiembre-2026/03_Eco3.jpg', 'Ecografía 3 - Septiembre 2026')">
+                        <img src="images/septiembre-2026/03_Eco3.jpg" alt="Eco 3">
+                        <div class="thumbnail-label">Eco 3</div>
+                    </div>
+                    <div class="thumbnail-container" onclick="openModal('images/septiembre-2026/04_Informe1.jpg', 'Informe 1 - Septiembre 2026')">
+                        <img src="images/septiembre-2026/04_Informe1.jpg" alt="Informe 1">
+                        <div class="thumbnail-label">Informe 1</div>
+                    </div>
+                    <div class="thumbnail-container" onclick="openModal('images/septiembre-2026/05_Informe2.jpg', 'Informe 2 - Septiembre 2026')">
+                        <img src="images/septiembre-2026/05_Informe2.jpg" alt="Informe 2">
+                        <div class="thumbnail-label">Informe 2</div>
+                    </div>
+                    <div class="thumbnail-container" onclick="openModal('images/septiembre-2026/06_InfrmeCirujano.jpg', 'Informe Cirujano - Dr. Juvenal Vargas')">
+                        <img src="images/septiembre-2026/06_InfrmeCirujano.jpg" alt="Informe Cirujano">
+                        <div class="thumbnail-label">Informe Cirujano</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloque de Donaciones / Aportes Voluntarios -->
+            <div class="donations-box">
+                <h3>Formas de Colaborar y Aportes Voluntarios</h3>
+                <p class="donations-message">
+                    De corazón, agradecemos infinitamente a cada persona, familiar y organización que nos extiende su mano amiga en este proceso. Cada aporte, mensaje de aliento y gesto de solidaridad representa un impulso invaluable para la recuperación y salud de Nathy. ¡Dios les bendiga grandemente!
+                </p>
+                
+                <div class="donations-grid">
+                    <div class="donation-card">
+                        <h4>🇻🇪 Cuenta en Venezuela</h4>
+                        <ul>
+                            <li><strong>Banco:</strong> Banco de Venezuela</li>
+                            <li><strong>Método:</strong> Pago Móvil</li>
+                            <li><strong>Cédula:</strong> V-16231959</li>
+                            <li><strong>Teléfono:</strong> 0424-7547703</li>
+                        </ul>
+                    </div>
+                    <div class="donation-card">
+                        <h4>🇨🇴 Cuenta en Colombia</h4>
+                        <ul>
+                            <li><strong>Banco:</strong> Bancolombia</li>
+                            <li><strong>Tipo:</strong> Ahorro</li>
+                            <li><strong>Nro. Cuenta:</strong> 08800023285</li>
+                            <li><strong>Titular:</strong> Rafael E. Padrón R.</li>
+                        </ul>
+                    </div>
+                    <div class="donation-card">
+                        <h4>🇺🇸 Zelle</h4>
+                        <ul>
+                            <li><strong>Nombre:</strong> Eduardo Padrón</li>
+                            <li><strong>Correo:</strong> epadron1981@gmail.com</li>
+                        </ul>
+                    </div>
+                    <div class="donation-card">
+                        <h4>🌐 Binance (USDT)</h4>
+                        <ul>
+                            <li><strong>Nombre:</strong> Nathy Méndez</li>
+                            <li><strong>Correo:</strong> lenatca@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="rifa-note">
+                    🎟️ <strong>¿Deseas participar en nuestra rifa benéfica?</strong> También puedes apoyarnos adquiriendo números de la rifa en curso. Contáctanos por WhatsApp para consultar los números disponibles y ser parte de esta gran ayuda.
+                </div>
+            </div>
+
+            <!-- Bloque de Contacto Directo WhatsApp -->
+            <div class="whatsapp-box">
+                <p><strong>¿Deseas más información, colaborar con la campaña o encargar un combo dulce y sal?</strong></p>
+                <p style="font-size: 0.9rem; color: #475569; margin-top: -5px;">Contáctanos directamente a través de nuestros números:</p>
+                <div class="whatsapp-buttons">
+                    <a href="https://wa.me/584247547703" target="_blank" class="btn-whatsapp">
+                        💬 WhatsApp Nathy (+58 424-7547703)
+                    </a>
+                    <a href="https://wa.me/584145310277" target="_blank" class="btn-whatsapp">
+                        💬 WhatsApp Oscar (+58 414-5310277)
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Pie de Página -->
+    <footer>
+        <p>&copy; 2026 Todos los derechos reservados. Diseñado por: Ing. Oscar Padrón.</p>
+        <p>Contacto de Soporte: <a href="mailto:proenetsc@gmail.com">proenetsc@gmail.com</a></p>
+    </footer>
+
+    <!-- Modal para ampliar imágenes -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close-btn">&times;</span>
+        <img class="modal-content" id="modalImg">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <script>
+        function openModal(imgSrc, captionText) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            const caption = document.getElementById('modalCaption');
+            
+            modal.style.display = "flex";
+            modalImg.src = imgSrc;
+            caption.innerHTML = captionText;
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
