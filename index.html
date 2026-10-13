@@ -128,6 +128,28 @@
             text-overflow: ellipsis;
         }
 
+        .enlace-tomografia {
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .enlace-tomografia a {
+            color: var(--primary-color);
+            text-decoration: none;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 8px 16px;
+            border-radius: 6px;
+            display: inline-block;
+            transition: background 0.2s;
+        }
+
+        .enlace-tomografia a:hover {
+            background: #dbeafe;
+            text-decoration: underline;
+        }
+
         /* Sección de Donaciones y Apoyo */
         .donations-box {
             background: #f8fafc;
@@ -352,7 +374,7 @@
 
     <meta charset="UTF-8">
     <title>Manual de LinkerPRO Nómina</title>
-    <link rel="stylesheet" href="..."> <!-- Tus estilos actuales -->
+    <link rel="stylesheet" href="...">
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JGJG0FRPN2"></script>
@@ -363,11 +385,6 @@
 
       gtag('config', 'G-JGJG0FRPN2');
     </script>
-
-	
-	
-	
-	
 </head>
 <body>
 
@@ -455,7 +472,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Concepto / Gasto Médico</th>
+                            <th>Conceptos / Gastos Médicos actualizado al 13/10/2026</th>
                             <th>Fase / Fecha Estimada</th>
                             <th>Estado</th>
                         </tr>
@@ -463,17 +480,17 @@
                     <tbody>
                         <tr>
                             <td>1) Consultas y Perfiles Hormonales (Laboratorios)</td>
-                            <td>Julio 2026</td>
+                            <td>Procesado: 10 de Julio 2026</td>
                             <td><span class="status-badge status-completado">Completado</span></td>
                         </tr>
                         <tr>
                             <td>2) Ecosonogramas y Monitoreo Inicial</td>
-                            <td>Julio - Septiembre 2026</td>
+                            <td>Procesado: 10 de Julio 2026</td>
                             <td><span class="status-badge status-completado">Completado</span></td>
                         </tr>
                         <tr>
                             <td>3) Consulta Especializada Endocrinología y Punción</td>
-                            <td>Septiembre 2026</td>
+                            <td>Procesado: 28 de Septiembre 2026</td>
                             <td><span class="status-badge status-completado">Completado</span></td>
                         </tr>
                         <tr>
@@ -487,31 +504,32 @@
                             <td><span class="status-badge status-completado">Completado</span></td>
                         </tr>
                         <tr>
-    			    <td>6) Tomografia de Cuello con alto contraste <a href="tomografia-nathy.html">Ver Imágenes</a></td>
-    			    <td>Procesado: 12/10/2026</td>
-    			    <td><span class="status-badge status-completado">Completado</span></td>
-			</tr>
+                            <td>6) Tomografia de Cuello con alto contraste... <a href="tomografia-nathy.html">Ver Imágenes</a></td>
+                            <td>Procesado: 12/10/2026</td>
+                            <td><span class="status-badge status-completado">Completado</span></td>
+                        </tr>
                         <tr>
-                            <td>7) Exámen NASOFIBROLARINGOSCOPIA por Otorrinolaringólogo</td>
-                            <td>A realizar: 13/10/2026</td>
+                            <td>7) Evaluación 1 y análisis de Tomografía</td>
+                            <td>Por la Cirujano Oncólogo 13/10/2026</td>
+                            <td><span class="status-badge status-completado">Completado</span></td>
+                        </tr>
+                        <tr>
+                            <td>8) Evaluación 2 y análisis de Tomografía</td>
+                            <td>Por el Cirujano General 13/10/2026</td>
                             <td><span class="status-badge status-pendiente">En Curso</span></td>
                         </tr>
                         <tr>
-                            <td>8) Evaluación Quirúrgica y Estudios</td>
-                            <td>Próxima Fase</td>
-                            <td><span class="status-badge status-pendiente">En Curso</span></td>
+                            <td>9) Evaluación Quirúrgica y Estudios Pre-Operatorios</td>
+                            <td>Próxima fase</td>
+                            <td><span class="status-badge status-pendiente">Pendiente</span></td>
                         </tr>
-
-
-
-
                         <tr>
-                            <td>9) Intervención Quirúrgica y Clínica</td>
+                            <td>10) Intervención Quirúrgica y Clínica</td>
                             <td>Por Programar</td>
                             <td><span class="status-badge status-pendiente">Pendiente</span></td>
                         </tr>
                         <tr>
-                            <td>10) Postoperatorio, Reposo (~21 días) y Controles Endocrinológicos</td>
+                            <td>11) Postoperatorio, Reposo (~21 días) y Controles Endocrinológicos</td>
                             <td>Fase Posterior a la Cirugía</td>
                             <td><span class="status-badge status-pendiente">Pendiente</span></td>
                         </tr>
@@ -564,8 +582,58 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Bloque de Donaciones / Aportes Voluntarios -->
+        <!-- NUEVA SECCIÓN: Seguimiento Octubre / 2026 -->
+        <div class="section-card">
+            <h2>Seguimiento Octubre / 2026</h2>
+            <div class="grid-2-col">
+                <div class="descripcion-col">
+                    <p>En el transcurso de octubre de 2026 se han consolidado evaluaciones clínicas fundamentales y estudios de alta resolución para definir los pasos definitivos:</p>
+                    <ul>
+                        <li><strong>Consulta Médica Especializada:</strong> Evaluación integral realizada por la <strong>Dra. Lisbeth Tovar (Cirujano Oncólogo)</strong>, analizando a detalle los resultados de biopsias y el estatus clínico actual.</li>
+                        <li><strong>Estudios de Imagen Avanzados:</strong> Procesamiento y revisión de la tomografía de cuello con alto contraste, permitiendo obtener una perspectiva clara de los tejidos circundantes y visualización amplia de ganglios linfáticos por extraer.</li>
+                        <li><strong>Coordinación Multidisciplinaria:</strong> Integración de opiniones médicas especializadas para programar las siguientes fases terapéuticas y preoperatorias con total seguridad.</li>
+                    </ul>
+                    <p><em>Haz clic en cualquier miniatura de la derecha para verificar los informes, estudios e imágenes correspondientes a octubre.</em></p>
+                </div>
+                <div>
+                    <div class="imagenes-col">
+                        <div class="thumbnail-container" onclick="openModal('images/octubre-2026/01_Informe_DraTovar.jpg', 'Consulta Dra. Lisbeth Tovar')">
+                            <img src="images/octubre-2026/01_Informe_DraTovar.jpg" alt="Inf. Dra. Tovar">
+                            <div class="thumbnail-label">Inf. Dra. Tovar</div>
+                        </div>
+                        <div class="thumbnail-container" onclick="openModal('images/octubre-2026/02_Tomografia.jpg', 'Tomografía de Cuello')">
+                            <img src="images/octubre-2026/02_Tomografia.jpg" alt="Tomografía">
+                            <div class="thumbnail-label">Tomografía</div>
+                        </div>
+                        <div class="thumbnail-container" onclick="openModal('images/octubre-2026/02_Tomografia.jpg', 'Tomografía de Cuello')">
+                            <img src="images/octubre-2026/02_Tomografia.jpg" alt="Tomografía">
+                            <div class="thumbnail-label">Tomografía</div>
+                        </div>
+                        <div class="thumbnail-container" onclick="openModal('images/octubre-2026/02_Tomografia.jpg', 'Tomografía de Cuello')">
+                            <img src="images/octubre-2026/02_Tomografia.jpg" alt="Tomografía">
+                            <div class="thumbnail-label">Tomografía</div>
+                        </div>
+                        <div class="thumbnail-container" onclick="openModal('images/octubre-2026/02_Tomografia.jpg', 'Tomografía de Cuello')">
+                            <img src="images/octubre-2026/02_Tomografia.jpg" alt="Tomografía">
+                            <div class="thumbnail-label">Tomografía</div>
+                        </div>
+                        <div class="thumbnail-container" onclick="openModal('images/octubre-2026/02_Tomografia.jpg', 'Tomografía de Cuello')">
+                            <img src="images/octubre-2026/02_Tomografia.jpg" alt="Tomografía">
+                            <div class="thumbnail-label">Tomografía</div>
+                        </div>
+                    </div>
+                    <!-- Enlace directo debajo de las miniaturas -->
+                    <div class="enlace-tomografia">
+                        <a href="tomografia-nathy.html" target="_blank">Ver Tomografía completa</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bloque de Donaciones / Aportes Voluntarios -->
+        <div class="section-card">
             <div class="donations-box">
                 <h3>Formas de Colaborar y Aportes Voluntarios</h3>
                 <p class="donations-message">
