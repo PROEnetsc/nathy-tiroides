@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado de Biopsia Final - Historial Clínico de Nathy</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a; /* Azul oscuro principal */
+            --secondary-color: #172554; /* Azul marino profundo */
+            --accent-color: #3b82f6; /* Azul acento para detalles */
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        header p {
+            margin-top: 0.4rem;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 0.8rem;
+            color: #93c5fd;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90%;
+            margin: 2rem auto;
+            flex: 1;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .biopsia-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        /* Contenedor de Miniaturas con Animación de Lupa */
+        .thumbnail-container {
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f1f5f9;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .thumbnail-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(30,58,138,0.2);
+            border-color: var(--accent-color);
+        }
+
+        .img-wrapper {
+            overflow: hidden;
+            width: 100%;
+            height: 220px;
+            background: #000;
+            position: relative;
+        }
+
+        .thumbnail-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .thumbnail-container:hover img {
+            transform: scale(1.12);
+        }
+
+        .thumbnail-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 12px;
+            color: #334155;
+            background: #e2e8f0;
+        }
+
+        .hint-text {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Estilos del Modal (Pantalla Completa con Zoom y Arrastre) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.92);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-stage {
+            position: relative;
+            max-width: 92vw;
+            max-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .modal-content {
+            max-width: 100%;
+            max-height: 75vh;
+            border-radius: 8px;
+            object-fit: contain;
+            cursor: grab; /* Indica que se puede agarrar y arrastrar */
+            transition: transform 0.1s ease-out; /* Animación fluida al arrastrar */
+            transform-origin: center center;
+            user-select: none;
+        }
+
+        .modal-content:active {
+            cursor: grabbing; /* Cambia al cerrar el puño mientras se arrastra */
+        }
+
+        .modal-caption {
+            color: white;
+            margin-top: 0.8rem;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .zoom-controls {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .zoom-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .zoom-btn:hover {
+            background: #2563eb;
+        }
+
+        .return-btn {
+            background: #ef4444;
+        }
+        .return-btn:hover {
+            background: #dc2626;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(0,0,0,0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s;
+            z-index: 2010;
+        }
+
+        .close-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+            margin-top: auto;
+            background: #ffffff;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .enlace-tomografia {
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cintillo Superior -->
+    <header>
+        <h1>RESULTADO DE BIOPSIA FINAL</h1>
+        <p>Documentación y Patología - Historial Clínico de Nathy</p>
+        <a href="index.html" class="back-link">&#8592; Volver al Historial Clínico Principal</a>
+    </header>
+
+    <!-- Contenedor Principal -->
+    <div class="container">
+        <div class="section-card">
+            <h2>Informe Histopatológico</h2>
+            <p class="hint-text">🔍 Pasa el cursor sobre las imágenes para activar la lupa. Haz clic para abrir en pantalla completa, aplicar zoom y arrastrar con el mouse.</p>
+
+            <!-- Cuadrícula de 2 Imágenes -->
+            <div class="biopsia-grid">
+                
+                <!-- Imagen 1 -->
+                <div class="thumbnail-container" onclick="abrirPantallaCompleta('images/biopsia3/biopsia3-1.jpg', 'Resultado de Biopsia Final - Página 1')">
+                    <div class="img-wrapper">
+                        <img src="images/biopsia3/biopsia3-1.jpg" alt="Biopsia Página 1">
+                    </div>
+                    <div class="thumbnail-label">Biopsia Final (Página 1)</div>
+                </div>
+
+                <!-- Imagen 2 -->
+                <div class="thumbnail-container" onclick="abrirPantallaCompleta('images/biopsia3/biopsia3-2.jpg', 'Resultado de Biopsia Final - Página 2')">
+                    <div class="img-wrapper">
+                        <img src="images/biopsia3/biopsia3-2.jpg" alt="Biopsia Página 2">
+                    </div>
+                    <div class="thumbnail-label">Biopsia Final (Página 2)</div>
+                </div>
+
+            </div>
+        </div>
+
+                    <!-- Enlace directo debajo de las miniaturas -->
+                    <div class="enlace-tomografia">
+                        <a href="index.html" target="_blank">Volver al inicio</a>
+                    </div>
+
+
+    </div>
+
+    <!-- Modal para Pantalla Completa, Zoom y Arrastre -->
+    <div id="imageModal" class="modal">
+        <span class="close-btn" onclick="cerrarPantallaCompleta()">&times;</span>
+        <div class="modal-stage" id="modalStage">
+            <img class="modal-content" id="modalImg">
+        </div>
+        <div class="modal-caption" id="modalCaption"></div>
+        <div class="zoom-controls">
+            <button class="zoom-btn" onclick="ajustarZoom(0.25)">🔍+ Acercar</button>
+            <button class="zoom-btn" onclick="ajustarZoom(-0.25)">🔍- Alejar</button>
+            <button class="zoom-btn" onclick="reiniciarZoom()">🔄 Restablecer</button>
+            <button class="zoom-btn return-btn" onclick="cerrarPantallaCompleta()">✖ Cerrar y Volver</button>
+        </div>
+    </div>
+
+    <!-- Pie de Página -->
+    <footer>
+        <p>&copy; 2026 Todos los derechos reservados. Diseñado por: Ing. Oscar Padrón.</p>
+    </footer>
+
+    <!-- Script de Control con Arrastre (Panning) y Zoom -->
+    <script>
+        let escalaZoom = 1;
+        let posX = 0;
+        let posY = 0;
+        let estaArrastrando = false;
+        let inicioX = 0;
+        let inicioY = 0;
+
+        const modalImg = document.getElementById('modalImg');
+
+        function abrirPantallaCompleta(imgSrc, captionText) {
+            const modal = document.getElementById('imageModal');
+            const caption = document.getElementById('modalCaption');
+            
+            modal.style.display = "flex";
+            modalImg.src = imgSrc;
+            caption.textContent = captionText;
+            reiniciarZoom();
+        }
+
+        function cerrarPantallaCompleta() {
+            document.getElementById('imageModal').style.display = "none";
+        }
+
+        function actualizarTransformacion() {
+            modalImg.style.transform = `translate(${posX}px, ${posY}px) scale(${escalaZoom})`;
+        }
+
+        function ajustarZoom(cantidad) {
+            escalaZoom += cantidad;
+            if (escalaZoom < 1) {
+                escalaZoom = 1;
+                posX = 0;
+                posY = 0; // Si vuelve al tamaño normal, centra la imagen
+            }
+            if (escalaZoom > 5) escalaZoom = 5; // Límite de zoom x5
+            actualizarTransformacion();
+        }
+
+        function reiniciarZoom() {
+            escalaZoom = 1;
+            posX = 0;
+            posY = 0;
+            actualizarTransformacion();
+        }
+
+        // Lógica para arrastrar la imagen con el mouse (Panning)
+        modalImg.addEventListener('mousedown', (e) => {
+            if (escalaZoom > 1) { // Solo permite arrastrar si hay zoom aplicado
+                estaArrastrando = true;
+                inicioX = e.clientX - posX;
+                inicioY = e.clientY - posY;
+                modalImg.style.cursor = 'grabbing';
+                e.preventDefault();
+            }
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!estaArrastrando) return;
+            posX = e.clientX - inicioX;
+            posY = e.clientY - inicioY;
+            actualizarTransformacion();
+        });
+
+        window.addEventListener('mouseup', () => {
+            estaArrastrando = false;
+            if (escalaZoom > 1) {
+                modalImg.style.cursor = 'grab';
+            }
+        });
+    </script>
+
+</body>
+</html>
